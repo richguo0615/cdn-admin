@@ -9,6 +9,9 @@ class Merchant extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'uid';
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
