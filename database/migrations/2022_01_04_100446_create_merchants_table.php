@@ -27,10 +27,10 @@ class CreateMerchantsTable extends Migration
             $table->timestamps();
 
             $table->primary('uid');
-            $table->foreign('user_id', "fk_{$this->tableName}_user_id")->references('id')->on('users');
-            $table->foreign('cdn_plan_id', "fk_{$this->tableName}_cdn_plan_id")->references('id')->on('cdn_plans');
-            $table->foreign('default_line_id', "fk_{$this->tableName}_default_line_id")->references('id')->on('lines');
-            $table->foreign('deliver_domain_id', "fk_{$this->tableName}_deliver_domain_id")->references('id')->on('domains');
+            $table->foreign('user_id', "fk_{$this->tableName}_user_id")->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('cdn_plan_id', "fk_{$this->tableName}_cdn_plan_id")->references('id')->on('cdn_plans')->onDelete('CASCADE');
+            $table->foreign('default_line_id', "fk_{$this->tableName}_default_line_id")->references('id')->on('lines')->onDelete('CASCADE');
+            $table->foreign('deliver_domain_id', "fk_{$this->tableName}_deliver_domain_id")->references('id')->on('domains')->onDelete('CASCADE');
         });
     }
 
