@@ -36,7 +36,9 @@ class MerchantController extends AdminController
         ]);
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-        $grid->column('user_id', __('User id'));
+        $grid->column('user_name', __('UserName'))->display(function() {
+            return $this->user->name;
+        });
         $grid->column('cdn_plan_id', __('Cdn plan id'));
         $grid->column('default_line_id', __('Default line id'));
         $grid->column('deliver_domain_id', __('Deliver domain id'));

@@ -24,4 +24,9 @@ class Merchant extends Model
         'expired_at',
         'status',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

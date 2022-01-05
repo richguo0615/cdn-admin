@@ -27,7 +27,7 @@ class CreateMerchantsTable extends Migration
             $table->unsignedBigInteger('deliver_domain_id')->comment('mapping domains.id')->nullable();
             $table->string('code', 50)->comment('商戶代碼');
 
-            $table->foreign('user_id', "fk_{$this->tableName}_user_id")->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('user_id', "fk_{$this->tableName}_user_id")->references('id')->on('users')->onDelete('CASCADE'); //TODO: need to check relationship
             $table->foreign('cdn_plan_id', "fk_{$this->tableName}_cdn_plan_id")->references('id')->on('cdn_plans')->onDelete('CASCADE');
             $table->foreign('default_line_id', "fk_{$this->tableName}_default_line_id")->references('id')->on('lines')->onDelete('CASCADE');
             $table->foreign('deliver_domain_id', "fk_{$this->tableName}_deliver_domain_id")->references('id')->on('domains')->onDelete('CASCADE');
