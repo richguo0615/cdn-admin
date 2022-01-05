@@ -29,8 +29,11 @@ class MerchantController extends AdminController
 
         $grid->column('uuid', __('Uuid'));
         $grid->column('name', __('Name'));
-        $grid->column('expired_at', __('Expired at'));
-        $grid->column('status', __('Status'));
+        $grid->column('expired_at', __('Expired at'))->date('Y-m-d');
+        $grid->column('status', __('Status'))->icon([
+            0 => 'toggle-off',
+            1 => 'toggle-on',
+        ]);
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
         $grid->column('user_id', __('User id'));
