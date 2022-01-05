@@ -9,7 +9,7 @@ class Merchant extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'uid';
+    protected $primaryKey = 'uuid';
     public $incrementing = false;
 
     /**
@@ -18,6 +18,7 @@ class Merchant extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'uuid',
         'name',
         'code',
         'expired_at',
