@@ -16,7 +16,7 @@ class MerchantController extends AdminController
      *
      * @var string
      */
-    protected $title = '商戶';
+    protected $title = 'Merchant';
 
     /**
      * Make a grid builder.
@@ -27,14 +27,20 @@ class MerchantController extends AdminController
     {
         $grid = new Grid(new Merchant());
 
-        $grid->column('uid', __('Uid'));
+        $grid->column('uuid', __('Uuid'));
         $grid->column('name', __('Name'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('code', __('Code'));
-        $grid->column('expired_at', __('Expired at'));
-        $grid->column('status', __('Status'));
+        $grid->column('expired_at', __('Expired at'))->date('Y-m-d');
+        $grid->column('status', __('Status'))->icon([
+            0 => 'toggle-off',
+            1 => 'toggle-on',
+        ]);
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
+        $grid->column('user_id', __('User id'));
+        $grid->column('cdn_plan_id', __('Cdn plan id'));
+        $grid->column('default_line_id', __('Default line id'));
+        $grid->column('deliver_domain_id', __('Deliver domain id'));
+        $grid->column('code', __('Code'));
 
         return $grid;
     }
@@ -49,14 +55,17 @@ class MerchantController extends AdminController
     {
         $show = new Show(Merchant::findOrFail($id));
 
-        $show->field('uid', __('Uid'));
+        $show->field('uuid', __('Uuid'));
         $show->field('name', __('Name'));
-        $show->field('user_id', __('User id'));
-        $show->field('code', __('Code'));
         $show->field('expired_at', __('Expired at'));
         $show->field('status', __('Status'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', __('User id'));
+        $show->field('cdn_plan_id', __('Cdn plan id'));
+        $show->field('default_line_id', __('Default line id'));
+        $show->field('deliver_domain_id', __('Deliver domain id'));
+        $show->field('code', __('Code'));
 
         return $show;
     }
@@ -70,15 +79,18 @@ class MerchantController extends AdminController
     {
         $form = new Form(new Merchant());
 
-        $form->text('uid', __('Uid'))->readonly();
+        // $form->text('uuid', __('Uuid'))->readonly();
         $form->text('name', __('Name'));
-        $form->number('user_id', __('User id'));
+        $form->date('expired_at', __('Expired at'))->default(date('Y-m-d H:i:s'));
         $form->text('code', __('Code'));
-        $form->datetime('expired_at', __('Expired at'))->default(date('Y-m-d H:i:s'));
         $form->switch('status', __('Status'));
-
+        $form->number('user_id', __('User id'));
+        $form->number('cdn_plan_id', __('Cdn plan id'));
+        $form->number('default_line_id', __('Default line id'));
+        $form->number('deliver_domain_id', __('Deliver domain id'));
         $form->saving(function (Form $form) {
-            $form->uid = Uuid::uuid4();
+            $form->input('uuid', Uuid::uuid4());
+            $form->hidden('uuid')->default('');
         });
 
         return $form;
